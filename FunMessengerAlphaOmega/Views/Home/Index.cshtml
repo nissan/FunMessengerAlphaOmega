@@ -11,8 +11,68 @@
     <title>Fun Messenger</title>
 </head>
 <body>
-    <div id="content"> 
-        Hello
+    <div id="content">
+        Hello 2
     </div>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        var MessageContainer = React.createClass({
+        render: function() {
+        return (
+        <div className="messageContainer">
+            <MessageForm />
+            <h2>Messages</h2>
+            <MessageList />
+        </div>
+        );
+        }
+        });
+
+        var MessageForm = React.createClass({
+        render: function(){
+        return (
+        <div className="messageForm">
+            <label for="newMessageItem">Message: </label>
+            <input id="newMessageItem" type="text" maxlength="140" />
+            <button id="sendNewMessage">Send</button>
+        </div>
+        );
+        }
+        });
+
+        var MessageList = React.createClass({
+        render: function(){
+        return (
+        <MessageItem senderName="Nissan Dookeran"
+                     senderImageUrl="https://pbs.twimg.com/profile_images/340937461/nissan.jpg"
+                     title="Hi"
+                     body="Hello out there!" />
+        );
+        }
+        });
+
+        var MessageItem = React.createClass({
+        render: function () {
+        return (
+        <div className="messageItem">
+            <div className="left">
+                <h3>{this.props.senderName}</h3>
+                <img src={this.props.senderImageUrl} alt={this.props.senderName} width="50" height="50" />
+            </div>
+            <div className="right">
+                <h3>{this.props.title}</h3>
+                <p>{this.props.body}</p>
+            </div>
+        </div>
+        );
+        }
+        });
+        ReactDOM.render(
+        <MessageContainer />,
+        document.getElementById('content')
+        );
+    </script>
 </body>
 </html>
